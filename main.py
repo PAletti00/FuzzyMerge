@@ -15,14 +15,14 @@ file_output = 'Output.csv'
 
 # Load data sets
 df_master = pd.read_csv(dir1 + file_master)
-df_master[['Name', 'Frequency']] = df_master['author,_freq'].str.split(',', expand=True)
+df_master['Name'] = df_master['author']
 df_master['Source'] = 'Master Dataset'
-del df_master['author,_freq']
+del df_master['author']
 
 df_new = pd.read_csv(dir2 + file_new)
-df_new[['Name', 'Frequency']] = df_new['coauthor,_freq'].str.split(',', expand=True)
+df_new['Name'] = df_new['coauthor']
 df_new['Source'] = 'New Dataset'
-del df_new['coauthor,_freq']
+del df_new['coauthor']
 
 # Merge the two data sets
 df_merged = pd.concat([df_master, df_new])
