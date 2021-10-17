@@ -1,5 +1,6 @@
 # Imports
 import pandas as pd
+from whoswho import who
 from difflib import SequenceMatcher
 
 # File directories and file names
@@ -38,9 +39,10 @@ for index1, row1 in df_merged.iterrows():
         name2 = row2['Name']
 
         if index2 > index1:
-            similarity_score = SequenceMatcher(None, name1, name2).ratio()
+            similarity_ratio = SequenceMatcher(None, name1, name2).ratio()
+            similarity_score = who.ratio(name1, name2)
 
-            if similarity_score > 0.75:
+            if similarity_ratio > 0.75 and similarity_score > 75:
                 df_merged.drop(index2, inplace=True)
             else:
                 pass
