@@ -2,6 +2,7 @@
 import pandas as pd
 from whoswho import who
 from difflib import SequenceMatcher
+import time
 
 # File directories and file names
 dir1 = '/Users/henrihapponen/Desktop/'
@@ -12,6 +13,9 @@ file_new = 'authorsonly.csv'
 
 dir_output = '/Users/henrihapponen/Desktop/'
 file_output = 'Output.csv'
+
+# Start timer
+start_time = time.time()
 
 # Load data sets
 df_master = pd.read_csv(dir1 + file_master)
@@ -52,3 +56,7 @@ df_merged_new = df_merged[df_merged['Source'] == 'New Dataset']
 
 # Save output as CSV
 df_merged_new.to_csv(dir_output + file_output, index=False)
+
+time_elapsed_minutes = int((time.time() - start_time) / 60)
+time_elapsed_seconds = round((time.time() - start_time) % 60, 2)
+print(f'Time elapsed: {str(time_elapsed_minutes)} minutes and {str(time_elapsed_seconds)} seconds')
