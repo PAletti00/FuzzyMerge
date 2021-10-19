@@ -7,6 +7,10 @@ from whoswho import who
 from difflib import SequenceMatcher
 import time
 
+# Insert row_limit (how many names to use from each dataset)
+# If no limit, comment out this line:
+row_limit = 1000
+
 # File directories and file names
 dir1 = '/Users/henrihapponen/Desktop/'
 file_master = 'authors.csv'
@@ -30,6 +34,13 @@ df_new = pd.read_csv(dir2 + file_new)
 df_new['Name'] = df_new['coauthor_name']
 df_new['Source'] = 'New Dataset'
 del df_new['coauthor_name']
+
+# If row_limit, then subset datasets
+if 'row_limit' in globals():
+    df_master = df_master[:row_limit]
+    df_new = df_new[:row_limit]
+else:
+    pass
 
 # Make a full list of names
 master_list = df_master['Name'].tolist()
